@@ -1,4 +1,5 @@
 ﻿using LearnMicroservice.IDP.Extensions;
+using LearnMicroservice.IDP.Persistence;
 using Serilog;
 
 Log.Information("Starting up");
@@ -6,10 +7,7 @@ var builder = WebApplication.CreateBuilder(args);
 try
 {
     builder.AddAppConfigurations();
-    builder.Host.UseSerilog((ctx, lc) => lc
-        .WriteTo.Console(outputTemplate: "[{Timestamp:HH:mm:ss} {Level}] {SourceContext}{NewLine}{Message:lj}{NewLine}{Exception}{NewLine}")
-        .Enrich.FromLogContext()
-        .ReadFrom.Configuration(ctx.Configuration));
+    builder.Host.ConfigureSerilog();
 
     var app = builder
             .ConfigureServices()
@@ -17,9 +15,9 @@ try
         ;
     //await app.MigrateDatabaseAsync(builder.Configuration);
     // Migration must be done before seeding data
-    //await builder.Services.EnsureSeedDataAsync();
+    await SeedUserData.EnsureSeedDataAsync(builder.Configuration.GetConnectionString("IdentitySqlConnection"));
 
-    app.Run();
+    app.MigrateDatabaseAsync(builder.Configuration).GetAwaiter().GetResult().Run();
 }
 
 catch (Exception ex)
