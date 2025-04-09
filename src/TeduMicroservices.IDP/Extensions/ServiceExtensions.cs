@@ -1,4 +1,5 @@
-﻿using LearnMicroservice.IDP.Entities;
+﻿using LearnMicroservice.IDP.Common;
+using LearnMicroservice.IDP.Entities;
 using LearnMicroservice.IDP.Persistence;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -7,6 +8,16 @@ namespace LearnMicroservice.IDP.Extensions;
 
 public static class ServiceExtensions
 {
+    internal static IServiceCollection AddConfigurationSettings(this IServiceCollection services,
+    IConfiguration configuration)
+    {
+        var emailSettings = configuration.GetSection(nameof(SMTPEmailSetting))
+            .Get<SMTPEmailSetting>();
+        services.AddSingleton(emailSettings);
+
+        return services;
+    }
+
     public static void ConfigureCors(this IServiceCollection services)
     {
         services.AddCors(options =>
@@ -47,7 +58,8 @@ public static class ServiceExtensions
                 opt.ConfigureDbContext = c => c.UseSqlServer(connectionString,
                     builder => builder.MigrationsAssembly("LearnMicroservice.IDP"));
             })
-            .AddAspNetIdentity<User>();
+            .AddAspNetIdentity<User>()
+            .AddProfileService<IdentityProfileService>();
     }
 
     public static void ConfigureIdentity(this IServiceCollection services, IConfiguration configuration)

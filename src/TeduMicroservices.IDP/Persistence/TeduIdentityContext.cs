@@ -1,15 +1,18 @@
 ﻿using LearnMicroservice.IDP.Entities;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using System.Data;
 
 namespace LearnMicroservice.IDP.Persistence;
 
 public class TeduIdentityContext : IdentityDbContext<User>
 {
+    public IDbConnection Connection => Database.GetDbConnection();
     public TeduIdentityContext(DbContextOptions<TeduIdentityContext> options) : base(options)
     {
     }
 
+    public DbSet<Permission> Permissions { get; set; }
     protected override void OnModelCreating(ModelBuilder builder)
     {
         builder.ApplyConfigurationsFromAssembly(typeof(TeduIdentityContext).Assembly);

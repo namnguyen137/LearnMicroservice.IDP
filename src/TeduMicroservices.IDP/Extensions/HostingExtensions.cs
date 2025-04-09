@@ -1,4 +1,8 @@
-﻿using Serilog;
+﻿using LearnMicroservice.IDP.Common.Domain;
+using LearnMicroservice.IDP.Repositories;
+using LearnMicroservices.IDP.Infrastructure.Domains;
+using LearnMicroservices.IDP.Services.EmailService;
+using Serilog;
 using Serilog.Sinks.Elasticsearch;
 using TeduMicroservices.IDP.Extensions;
 
@@ -18,10 +22,15 @@ public static class HostingExtensions
     {
         // uncomment if you want to add a UI
         builder.Services.AddRazorPages();
+        builder.Services.AddConfigurationSettings(builder.Configuration);
+        builder.Services.AddScoped<IEmailSender, SmtpMailService>();
         builder.Services.ConfigureCookiePolicy();
         builder.Services.ConfigureCors();
         builder.Services.ConfigureIdentity(builder.Configuration);
         builder.Services.ConfigureIdentityServer(builder.Configuration);
+        builder.Services.AddTransient(typeof(IUnitOfWork), typeof(UnitOfWork));
+        builder.Services.AddTransient(typeof(IRepositoryBase<,>), typeof(RepositoryBase<,>));
+        builder.Services.AddScoped<IRepositoryManager, RepositoryManager>();
         return builder.Build();
     }
 
