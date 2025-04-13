@@ -1,8 +1,9 @@
 ﻿using LearnMicroservice.IDP.Common;
-using LearnMicroservice.IDP.Entities;
-using LearnMicroservice.IDP.Persistence;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.OpenApi.Models;
+using TeduMicroservices.IDP.Infrastructure.Entities;
+using TeduMicroservices.IDP.Persistence;
 
 namespace LearnMicroservice.IDP.Extensions;
 
@@ -85,5 +86,24 @@ public static class ServiceExtensions
             .AddDefaultTokenProviders();
     }
 
+    public static void ConfigureSwagger(this IServiceCollection services, IConfiguration configuration)
+    {
+        services.AddEndpointsApiExplorer();
+        services.AddSwaggerGen(c =>
+        {
+            c.EnableAnnotations();
+            c.SwaggerDoc("v1", new OpenApiInfo
+            {
+                Title = "Learn TEDU",
+                Version = "v1",
+                Contact = new OpenApiContact
+                {
+                    Name = "Tedu Identity Service",
+                    Email = "nam.nguyentan",
+                    Url = new Uri("Https://google.com")
+                }
+            });
+        });
+    }
 
 }

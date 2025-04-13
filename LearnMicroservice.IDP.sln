@@ -2,13 +2,19 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.5.2.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LearnMicroservice.IDP", "src\TeduMicroservices.IDP\LearnMicroservice.IDP.csproj", "{5DC06C1C-B19C-4050-A6EA-0827AE30DB2B}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{6C061E4B-75C3-47F6-9D89-66E588818DEA}"
 	ProjectSection(SolutionItems) = preProject
 		docker-compose.yml = docker-compose.yml
 		README.md = README.md
 	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{DB133A64-09B5-4EDC-9F41-261060F56B28}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TeduMicroservices.IDP.Presentation", "src\TeduMicroservices.IDP.Presentation\TeduMicroservices.IDP.Presentation.csproj", "{3E36EA64-5ED1-411F-8C0C-7F5FF20C9C89}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TeduMicroservices.IDP.Infrastructure", "src\TeduMicroservices.IDP.Infrastructure\TeduMicroservices.IDP.Infrastructure.csproj", "{CA49002A-ADAC-4EE2-9082-708E0078F2E4}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LearnMicroservice.IDP", "src\TeduMicroservices.IDP\LearnMicroservice.IDP.csproj", "{CF29F323-F1A4-4E9C-BB4A-099060EF5532}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -16,13 +22,26 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{5DC06C1C-B19C-4050-A6EA-0827AE30DB2B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{5DC06C1C-B19C-4050-A6EA-0827AE30DB2B}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{5DC06C1C-B19C-4050-A6EA-0827AE30DB2B}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{5DC06C1C-B19C-4050-A6EA-0827AE30DB2B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3E36EA64-5ED1-411F-8C0C-7F5FF20C9C89}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3E36EA64-5ED1-411F-8C0C-7F5FF20C9C89}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3E36EA64-5ED1-411F-8C0C-7F5FF20C9C89}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3E36EA64-5ED1-411F-8C0C-7F5FF20C9C89}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CA49002A-ADAC-4EE2-9082-708E0078F2E4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CA49002A-ADAC-4EE2-9082-708E0078F2E4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CA49002A-ADAC-4EE2-9082-708E0078F2E4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CA49002A-ADAC-4EE2-9082-708E0078F2E4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CF29F323-F1A4-4E9C-BB4A-099060EF5532}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CF29F323-F1A4-4E9C-BB4A-099060EF5532}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CF29F323-F1A4-4E9C-BB4A-099060EF5532}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CF29F323-F1A4-4E9C-BB4A-099060EF5532}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{3E36EA64-5ED1-411F-8C0C-7F5FF20C9C89} = {DB133A64-09B5-4EDC-9F41-261060F56B28}
+		{CA49002A-ADAC-4EE2-9082-708E0078F2E4} = {DB133A64-09B5-4EDC-9F41-261060F56B28}
+		{CF29F323-F1A4-4E9C-BB4A-099060EF5532} = {DB133A64-09B5-4EDC-9F41-261060F56B28}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {878DE2A6-0EC0-4412-A913-E3FADA3E0EE7}

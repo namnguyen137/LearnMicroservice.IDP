@@ -1,14 +1,14 @@
-﻿using LearnMicroservice.IDP.Entities;
-using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore.Storage;
+using TeduMicroservices.IDP.Infrastructure.Entities;
 
-namespace LearnMicroservice.IDP.Repositories;
+namespace TeduMicroservices.IDP.Infrastructure.Repositories;
 
 public interface IRepositoryManager
 {
     UserManager<User> UserManager { get; }
-    RoleManager<User> RoleManager { get; }
-
+    RoleManager<IdentityRole> RoleManager { get; }
+    IPermissionRepository Permission { get; }
     Task<int> SaveAsync();
     Task<IDbContextTransaction> BeginTransactionAsync();
     Task EndTransactionAsync();

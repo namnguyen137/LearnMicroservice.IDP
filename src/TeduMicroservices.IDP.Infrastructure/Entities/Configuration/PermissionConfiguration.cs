@@ -1,8 +1,8 @@
-﻿using LearnMicroservice.IDP.Common;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using TeduMicroservices.IDP.Infrastructure.Common;
 
-namespace LearnMicroservice.IDP.Entities.Configuration;
+namespace TeduMicroservices.IDP.Infrastructure.Entities.Configuration;
 
 public class PermissionConfiguration : IEntityTypeConfiguration<Permission>
 {

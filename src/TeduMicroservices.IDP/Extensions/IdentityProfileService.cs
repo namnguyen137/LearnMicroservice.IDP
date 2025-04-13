@@ -1,10 +1,10 @@
 ﻿using Duende.IdentityServer.Extensions;
 using Duende.IdentityServer.Models;
 using Duende.IdentityServer.Services;
-using LearnMicroservice.IDP.Common;
-using LearnMicroservice.IDP.Entities;
 using Microsoft.AspNetCore.Identity;
 using System.Security.Claims;
+using TeduMicroservices.IDP.Infrastructure.Common;
+using TeduMicroservices.IDP.Infrastructure.Entities;
 
 namespace LearnMicroservice.IDP.Extensions;
 

@@ -1,4 +1,4 @@
-﻿namespace LearnMicroservice.IDP.Common.Domain;
+﻿namespace TeduMicroservices.IDP.Infrastructure.Domains;
 
 public interface IEntityBase<T>
 {

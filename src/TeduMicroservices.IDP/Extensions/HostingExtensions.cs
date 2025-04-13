@@ -1,10 +1,12 @@
-﻿using LearnMicroservice.IDP.Common.Domain;
-using LearnMicroservice.IDP.Repositories;
+﻿using LearnMicroservices.IDP.Extensions;
 using LearnMicroservices.IDP.Infrastructure.Domains;
 using LearnMicroservices.IDP.Services.EmailService;
+using Microsoft.AspNetCore.Mvc;
 using Serilog;
 using Serilog.Sinks.Elasticsearch;
 using TeduMicroservices.IDP.Extensions;
+using TeduMicroservices.IDP.Infrastructure.Domains;
+using TeduMicroservices.IDP.Infrastructure.Repositories;
 
 namespace LearnMicroservice.IDP.Extensions;
 
@@ -21,8 +23,11 @@ public static class HostingExtensions
     public static WebApplication ConfigureServices(this WebApplicationBuilder builder)
     {
         // uncomment if you want to add a UI
-        builder.Services.AddRazorPages();
+        builder.Services.AddAutoMapper(typeof(Program));
+        builder.Services.AddControllersWithViews();
+
         builder.Services.AddConfigurationSettings(builder.Configuration);
+        builder.Services.AddRazorPages();
         builder.Services.AddScoped<IEmailSender, SmtpMailService>();
         builder.Services.ConfigureCookiePolicy();
         builder.Services.ConfigureCors();
@@ -30,7 +35,17 @@ public static class HostingExtensions
         builder.Services.ConfigureIdentityServer(builder.Configuration);
         builder.Services.AddTransient(typeof(IUnitOfWork), typeof(UnitOfWork));
         builder.Services.AddTransient(typeof(IRepositoryBase<,>), typeof(RepositoryBase<,>));
+        builder.Services.AddScoped<IPermissionRepository, PermissionRepository>();
         builder.Services.AddScoped<IRepositoryManager, RepositoryManager>();
+        builder.Services.AddControllers(config =>
+        {
+            config.RespectBrowserAcceptHeader = true;
+            config.ReturnHttpNotAcceptable = true;
+            config.Filters.Add(new ProducesAttribute("application/json", "text/plain", "text/json"));
+        }).AddApplicationPart(typeof(TeduMicroservices.IDP.Presentation.AssemblyReference).Assembly);
+        builder.Services.ConfigureSwagger(builder.Configuration);
+        builder.Services.Configure<RouteOptions>(options => options.LowercaseUrls = true);
+
         return builder.Build();
     }
 
@@ -46,11 +61,16 @@ public static class HostingExtensions
         // uncomment if you want to add a UI
         app.UseStaticFiles();
         app.UseCors("CorsPolicy");
+        app.UseSwagger();
+        app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Tedu Identity API"));
         app.UseRouting();
-
+        app.UseMiddleware<ErrorWrappingMiddleware>();
         app.UseCookiePolicy();
         app.UseIdentityServer();
-
+        app.UseEndpoints(endpoints =>
+        {
+            endpoints.MapControllers();
+        });
         // uncomment if you want to add a UI
         app.UseAuthorization();
         app.MapRazorPages().RequireAuthorization();

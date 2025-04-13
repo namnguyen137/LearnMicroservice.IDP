@@ -1,9 +1,9 @@
-﻿using LearnMicroservice.IDP.Common;
-using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using TeduMicroservices.IDP.Infrastructure.Common;
 
-namespace LearnMicroservice.IDP.Entities.Configuration;
+namespace TeduMicroservices.IDP.Infrastructure.Entities.Configuration;
 
 public class RoleConfiguration : IEntityTypeConfiguration<IdentityRole>
 {

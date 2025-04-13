@@ -1,4 +1,4 @@
-﻿namespace LearnMicroservice.IDP.Common;
+﻿namespace TeduMicroservices.IDP.Infrastructure.Common;
 
 public static class SystemConstants
 {

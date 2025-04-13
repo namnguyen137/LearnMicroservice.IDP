@@ -1,7 +1,7 @@
 ﻿
-using LearnMicroservice.IDP.Persistence;
+using TeduMicroservices.IDP.Persistence;
 
-namespace LearnMicroservice.IDP.Common.Domain;
+namespace TeduMicroservices.IDP.Infrastructure.Domains;
 
 public class UnitOfWork : IUnitOfWork
 {

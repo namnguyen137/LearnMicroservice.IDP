@@ -1,9 +1,11 @@
-using LearnMicroservice.IDP.Common.Domain;
-using LearnMicroservice.IDP.Persistence;
+using Dapper;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage;
 using System.Data;
 using System.Linq.Expressions;
+using TeduMicroservices.IDP.Infrastructure.Domains;
+using TeduMicroservices.IDP.Infrastructure.Exceptions;
+using TeduMicroservices.IDP.Persistence;
 
 namespace LearnMicroservices.IDP.Infrastructure.Domains;
 
@@ -98,35 +100,35 @@ public class RepositoryBase<T, K> : IRepositoryBase<T, K>
 
     #region Dapper
 
-    //public async Task<IReadOnlyList<TModel>> QueryAsync<TModel>(string sql, object? param,
-    //    CommandType? commandType = CommandType.StoredProcedure, IDbTransaction? transaction = null, int? commandTimeout = 30)
-    //where TModel : EntityBase<K>
-    //{
-    //    return (await _dbContext.Connection.QueryAsync<TModel>(sql, param,
-    //            transaction, 30, CommandType.StoredProcedure)).AsList();
-    //}
+    public async Task<IReadOnlyList<TModel>> QueryAsync<TModel>(string sql, object? param,
+        CommandType? commandType = CommandType.StoredProcedure, IDbTransaction? transaction = null, int? commandTimeout = 30)
+    where TModel : EntityBase<K>
+    {
+        return (await _dbContext.Connection.QueryAsync<TModel>(sql, param,
+                transaction, 30, CommandType.StoredProcedure)).AsList();
+    }
 
-    //public async Task<TModel> QueryFirstOrDefaultAsync<TModel>(string sql, object? param,
-    //    CommandType? commandType = CommandType.StoredProcedure, IDbTransaction? transaction = null, int? commandTimeout = 30)
-    //    where TModel : EntityBase<K>
-    //{
-    //    var entity = await _dbContext.Connection.QueryFirstOrDefaultAsync<TModel>(sql, param, transaction, commandTimeout, commandType);
-    //    if (entity == null) throw new EntityNotFoundException();
-    //    return entity;
-    //}
+    public async Task<TModel> QueryFirstOrDefaultAsync<TModel>(string sql, object? param,
+        CommandType? commandType = CommandType.StoredProcedure, IDbTransaction? transaction = null, int? commandTimeout = 30)
+        where TModel : EntityBase<K>
+    {
+        var entity = await _dbContext.Connection.QueryFirstOrDefaultAsync<TModel>(sql, param, transaction, commandTimeout, commandType);
+        if (entity == null) throw new EntityNotFoundException();
+        return entity;
+    }
 
-    //public async Task<TModel> QuerySingleAsync<TModel>(string sql, object? param,
-    //    CommandType? commandType = CommandType.StoredProcedure, IDbTransaction? transaction = null, int? commandTimeout = 30)
-    //    where TModel : EntityBase<K>
-    //{
-    //    return await _dbContext.Connection.QuerySingleAsync<TModel>(sql, param, transaction, commandTimeout, commandType);
-    //}
+    public async Task<TModel> QuerySingleAsync<TModel>(string sql, object? param,
+        CommandType? commandType = CommandType.StoredProcedure, IDbTransaction? transaction = null, int? commandTimeout = 30)
+        where TModel : EntityBase<K>
+    {
+        return await _dbContext.Connection.QuerySingleAsync<TModel>(sql, param, transaction, commandTimeout, commandType);
+    }
 
-    //public async Task<int> ExecuteAsync(string sql, object? param,
-    //    CommandType? commandType = CommandType.StoredProcedure, IDbTransaction? transaction = null, int? commandTimeout = 30)
-    //{
-    //    return await _dbContext.Connection.ExecuteAsync(sql, param, transaction, commandTimeout, commandType);
-    //}
+    public async Task<int> ExecuteAsync(string sql, object? param,
+        CommandType? commandType = CommandType.StoredProcedure, IDbTransaction? transaction = null, int? commandTimeout = 30)
+    {
+        return await _dbContext.Connection.ExecuteAsync(sql, param, transaction, commandTimeout, commandType);
+    }
 
     #endregion Dapper
 

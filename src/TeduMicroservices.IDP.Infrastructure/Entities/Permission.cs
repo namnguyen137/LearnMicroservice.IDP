@@ -1,19 +1,26 @@
-﻿using LearnMicroservice.IDP.Common.Domain;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
+﻿using Microsoft.AspNetCore.Identity;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using TeduMicroservices.IDP.Infrastructure.Domains;
 
-namespace LearnMicroservice.IDP.Entities;
+namespace TeduMicroservices.IDP.Infrastructure.Entities;
 
 public class Permission : EntityBase<long>
 {
+    public Permission()
+    {
+    }
     public Permission(string function, string command, string roleId)
     {
         Function = function;
         Command = command;
         RoleId = roleId;
     }
+    public Permission(long id, string function, string command, string roleId) : this(function, command, roleId)
+    {
+        Id = id;
+    }
+
     [Key]
     [MaxLength(50)]
     [Column(TypeName = "varchar(50)")]

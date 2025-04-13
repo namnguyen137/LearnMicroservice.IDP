@@ -1,9 +1,9 @@
-﻿using LearnMicroservice.IDP.Entities;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System.Data;
+using TeduMicroservices.IDP.Infrastructure.Entities;
 
-namespace LearnMicroservice.IDP.Persistence;
+namespace TeduMicroservices.IDP.Persistence;
 
 public class TeduIdentityContext : IdentityDbContext<User>
 {
@@ -17,6 +17,5 @@ public class TeduIdentityContext : IdentityDbContext<User>
     {
         builder.ApplyConfigurationsFromAssembly(typeof(TeduIdentityContext).Assembly);
         builder.ApplyIdentityConfiguration();
-        //base.OnModelCreating(builder);
     }
 }

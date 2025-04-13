@@ -1,4 +1,4 @@
-﻿namespace LearnMicroservice.IDP.Common;
+namespace LearnMicroservice.IDP.Common;
 
 public class SMTPEmailSetting
 {
